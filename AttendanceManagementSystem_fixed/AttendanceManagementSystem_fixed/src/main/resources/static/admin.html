@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — AttendX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>AttendX</h1>
+      <span>Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="active" onclick="showSection('dashboard')"><span class="icon">📊</span> Dashboard</a>
+      <a href="#" onclick="showSection('students')">  <span class="icon">🎓</span> Students</a>
+      <a href="#" onclick="showSection('teachers')">  <span class="icon">👩‍🏫</span> Teachers</a>
+      <a href="#" onclick="showSection('classrooms')"><span class="icon">🏫</span> Classrooms</a>
+      <a href="#" onclick="showSection('attendance')"><span class="icon">✅</span> Attendance</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-secondary btn-full btn-sm" onclick="logout()">← Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ── DASHBOARD ─────────────────────────────────── -->
+    <section id="sec-dashboard">
+      <div class="page-header">
+        <h2>Dashboard</h2>
+        <p>Overview of the attendance system</p>
+      </div>
+      <div class="grid-3">
+        <div class="stat-card">
+          <div class="stat-icon">🎓</div>
+          <div class="stat-value" id="dash-students">—</div>
+          <div class="stat-label">Total Students</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👩‍🏫</div>
+          <div class="stat-value" id="dash-teachers">—</div>
+          <div class="stat-label">Total Teachers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏫</div>
+          <div class="stat-value" id="dash-classes">—</div>
+          <div class="stat-label">Classrooms</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:8px">
+        <h3>Recent Students</h3>
+        <div id="dash-recent-table" class="table-wrap">
+          <div class="empty"><div class="empty-icon">📭</div>Loading...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STUDENTS ───────────────────────────────────── -->
+    <section id="sec-students" style="display:none">
+      <div class="page-header">
+        <h2>Students</h2>
+        <p>Create, view and manage students</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>➕ Create Student</h3>
+          <div class="form-group"><label>Full Name</label><input id="s-name" placeholder="e.g. Priya Sharma"></div>
+          <div class="form-group"><label>Department</label><input id="s-dept" placeholder="e.g. Computer Science"></div>
+          <div class="form-group"><label>Password</label><input id="s-pass" type="password" placeholder="Student password"></div>
+          <div class="form-group"><label>Classroom ID</label><input id="s-cid" type="number" placeholder="Classroom ID"></div>
+          <button class="btn btn-primary" onclick="createStudent()">Create Student</button>
+        </div>
+        <div class="card">
+          <h3>✏️ Update Student</h3>
+          <div class="form-group"><label>Student ID</label><input id="us-id" type="number" placeholder="ID to update"></div>
+          <div class="form-group"><label>New Name</label><input id="us-name" placeholder="New name"></div>
+          <div class="form-group"><label>New Department</label><input id="us-dept" placeholder="New department"></div>
+          <div class="form-group"><label>Classroom ID</label><input id="us-cid" type="number" placeholder="Classroom ID"></div>
+          <button class="btn btn-secondary" onclick="updateStudent()">Update Student</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>All Students <span class="badge">live</span></h3>
+        <div style="margin-bottom:14px;display:flex;gap:10px">
+          <button class="btn btn-secondary btn-sm" onclick="loadStudents()">🔄 Refresh</button>
+        </div>
+        <div id="student-table" class="table-wrap">
+          <div class="empty"><div class="empty-icon">🎓</div><p>Click Refresh to load students</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TEACHERS ───────────────────────────────────── -->
+    <section id="sec-teachers" style="display:none">
+      <div class="page-header">
+        <h2>Teachers</h2>
+        <p>Manage teacher accounts</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>➕ Create Teacher</h3>
+          <div class="form-group"><label>Full Name</label><input id="t-name" placeholder="e.g. Dr. Rajan"></div>
+          <div class="form-group"><label>Department</label><input id="t-dept" placeholder="e.g. Mathematics"></div>
+          <div class="form-group"><label>Password</label><input id="t-pass" type="password" placeholder="Teacher password"></div>
+          <button class="btn btn-primary" onclick="createTeacher()">Create Teacher</button>
+        </div>
+        <div class="card">
+          <h3>🔍 Find Teacher by ID</h3>
+          <div class="form-group"><label>Teacher ID</label><input id="t-view-id" type="number" placeholder="Enter ID"></div>
+          <button class="btn btn-secondary" onclick="viewTeacher()">View Teacher</button>
+          <div id="teacher-result" style="margin-top:16px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CLASSROOMS ─────────────────────────────────── -->
+    <section id="sec-classrooms" style="display:none">
+      <div class="page-header">
+        <h2>Classrooms</h2>
+        <p>Create and assign classrooms to teachers</p>
+      </div>
+      <div class="card" style="max-width:480px">
+        <h3>➕ Create Classroom</h3>
+        <div class="form-group"><label>Class Name</label><input id="c-name" placeholder="e.g. CSE-A 2024"></div>
+        <button class="btn btn-primary" onclick="createClassroom()">Create Classroom</button>
+      </div>
+    </section>
+
+    <!-- ── ATTENDANCE ─────────────────────────────────── -->
+    <section id="sec-attendance" style="display:none">
+      <div class="page-header">
+        <h2>Attendance</h2>
+        <p>Record and view student attendance</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>📝 Mark Attendance</h3>
+          <div class="form-group"><label>Student ID</label><input id="att-sid" type="number" placeholder="Student ID"></div>
+          <div class="form-group"><label>Present Hours</label><input id="att-present" type="number" placeholder="Hours present" min="0"></div>
+          <div class="form-group"><label>Total Hours</label><input id="att-total" type="number" placeholder="Total hours" min="1"></div>
+          <button class="btn btn-primary" onclick="markAttendance()">Submit Attendance</button>
+        </div>
+        <div class="card">
+          <h3>🔍 View Attendance Record</h3>
+          <div class="form-group"><label>Attendance Record ID</label><input id="att-view-id" type="number" placeholder="Attendance ID"></div>
+          <button class="btn btn-secondary" onclick="viewAttendance()">View Record</button>
+          <div id="att-result" style="margin-top:16px"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<div id="toast"></div>
+<script src="admin.js"></script>
+</body>
+</html>

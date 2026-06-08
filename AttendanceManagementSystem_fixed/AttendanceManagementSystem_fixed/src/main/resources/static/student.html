@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Student — AttendX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>AttendX</h1>
+      <span>Student Portal</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="active" onclick="showSection('attendance')"><span class="icon">📊</span> My Attendance</a>
+      <a href="#" onclick="showSection('profile')">  <span class="icon">👤</span> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-secondary btn-full btn-sm" onclick="logout()">← Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ATTENDANCE -->
+    <section id="sec-attendance">
+      <div class="page-header">
+        <h2>My Attendance</h2>
+        <p>View your attendance records and percentage</p>
+      </div>
+
+      <div class="card" style="max-width:480px">
+        <h3>🔍 Look Up Student</h3>
+        <div class="form-group">
+          <label>Student ID</label>
+          <input id="stud-id" type="number" placeholder="Enter your student ID">
+        </div>
+        <button class="btn btn-primary" onclick="viewAttendance()">View Attendance</button>
+      </div>
+
+      <div id="attendance-result"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="sec-profile" style="display:none">
+      <div class="page-header">
+        <h2>Profile</h2>
+        <p>Your student information</p>
+      </div>
+      <div class="card" style="max-width:480px">
+        <h3>👤 Student Details</h3>
+        <div class="form-group">
+          <label>Student ID</label>
+          <input id="profile-id" type="number" placeholder="Enter your student ID">
+        </div>
+        <button class="btn btn-secondary" onclick="viewProfile()">Load Profile</button>
+        <div id="profile-result" style="margin-top:16px"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<div id="toast"></div>
+<script src="student.js"></script>
+</body>
+</html>

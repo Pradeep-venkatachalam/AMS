@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Attendance Management System</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(45,212,191,.08) 0%, transparent 60%);
+    }
+    .hero h1 { font-family: 'DM Serif Display',serif; font-size: 52px; color: var(--accent); margin-bottom: 16px; }
+    .hero p  { color: var(--text-muted); font-size: 17px; max-width: 480px; margin-bottom: 40px; }
+    .role-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .role-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 36px;
+      cursor: pointer;
+      transition: all .2s;
+      width: 200px;
+      text-align: center;
+    }
+    .role-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(45,212,191,.1);
+    }
+    .role-card .icon { font-size: 36px; margin-bottom: 12px; }
+    .role-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .role-card p  { font-size: 12px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+<div class="hero">
+  <h1>AttendX</h1>
+  <p>Streamlined attendance tracking for students, teachers, and administrators.</p>
+  <div class="role-grid">
+    <div class="role-card" onclick="location.href='login.html?role=ADMIN'">
+      <div class="icon">🛡️</div>
+      <h3>Admin</h3>
+      <p>Manage all users &amp; records</p>
+    </div>
+    <div class="role-card" onclick="location.href='login.html?role=TEACHER'">
+      <div class="icon">📋</div>
+      <h3>Teacher</h3>
+      <p>Mark &amp; view attendance</p>
+    </div>
+    <div class="role-card" onclick="location.href='login.html?role=STUDENT'">
+      <div class="icon">🎓</div>
+      <h3>Student</h3>
+      <p>View your attendance record</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

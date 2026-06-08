@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Teacher — AttendX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>AttendX</h1>
+      <span>Teacher Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="active" onclick="showSection('mark')">  <span class="icon">✅</span> Mark Attendance</a>
+      <a href="#" onclick="showSection('students')"><span class="icon">🎓</span> Students</a>
+      <a href="#" onclick="showSection('add')">    <span class="icon">➕</span> Add Student</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-secondary btn-full btn-sm" onclick="logout()">← Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- MARK ATTENDANCE -->
+    <section id="sec-mark">
+      <div class="page-header">
+        <h2>Mark Attendance</h2>
+        <p>Record student presence or absence for today</p>
+      </div>
+      <div class="card" style="max-width:500px">
+        <h3>✅ Quick Mark</h3>
+        <div class="form-group">
+          <label>Student ID</label>
+          <input id="sid" type="number" placeholder="Enter student ID">
+        </div>
+        <div style="display:flex;gap:12px;margin-top:4px">
+          <button class="btn btn-primary" onclick="present()" style="flex:1">✅ Present</button>
+          <button class="btn btn-danger"  onclick="absent()"  style="flex:1">❌ Absent</button>
+        </div>
+        <p id="mark-msg" style="margin-top:14px;color:var(--text-muted);font-size:13px;min-height:18px"></p>
+      </div>
+    </section>
+
+    <!-- STUDENTS LIST -->
+    <section id="sec-students" style="display:none">
+      <div class="page-header">
+        <h2>All Students</h2>
+        <p>View all enrolled students</p>
+      </div>
+      <div class="card">
+        <div style="margin-bottom:14px">
+          <button class="btn btn-secondary btn-sm" onclick="loadStudents()">🔄 Load Students</button>
+        </div>
+        <div id="student-list" class="table-wrap">
+          <div class="empty"><div class="empty-icon">🎓</div><p>Click to load students</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADD STUDENT -->
+    <section id="sec-add" style="display:none">
+      <div class="page-header">
+        <h2>Add Student</h2>
+        <p>Enroll a new student</p>
+      </div>
+      <div class="card" style="max-width:480px">
+        <h3>➕ New Student</h3>
+        <div class="form-group"><label>Full Name</label><input id="ns-name" placeholder="Student name"></div>
+        <div class="form-group"><label>Department</label><input id="ns-dept" placeholder="Department"></div>
+        <div class="form-group"><label>Password</label><input id="ns-pass" type="password" placeholder="Password"></div>
+        <div class="form-group"><label>Classroom ID</label><input id="ns-cid" type="number" placeholder="Classroom ID"></div>
+        <button class="btn btn-primary" onclick="addStudent()">Add Student</button>
+      </div>
+    </section>
+  </main>
+</div>
+<div id="toast"></div>
+<script src="teacher.js"></script>
+</body>
+</html>
